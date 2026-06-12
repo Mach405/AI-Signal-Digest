@@ -1,0 +1,19 @@
+# General pipeline settings.
+
+# How far back to look on each run. Set to 24 so daily runs cover clean,
+# non-overlapping windows (no cross-run duplicates) — important for the cloud
+# schedule where the dedup store is ephemeral. Bump up only for catch-up runs.
+lookback_hours: 24
+
+# Cap transcript length passed downstream (characters) to keep digests lean.
+max_transcript_chars: 18000
+
+# Where outputs go (relative to project root).
+inbox_dir: data/inbox       # raw fetched items, one JSON per run
+digest_dir: data/digests    # finished daily digests
+
+# Email delivery (handled by the scheduled Claude agent via your Gmail connection).
+email:
+  enabled: true
+  to: "whoisjohngalt22@gmail.com"
+  subject_prefix: "📈 AI Signal Digest"

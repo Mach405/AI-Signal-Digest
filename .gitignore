@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Ephemeral run artifacts — regenerated each run; not needed in the repo.
+data/seen.sqlite
+data/inbox/
+data/digests/

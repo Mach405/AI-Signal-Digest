@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MowerFinder — Zero-Turn Mower Listings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">🚜</span>
+        <span class="brand-name">MowerFinder</span>
+      </a>
+
+      <div class="search-pill" id="searchPill">
+        <input id="keyword" type="text" placeholder="Search make, model, or keyword…" autocomplete="off" />
+        <button class="search-btn" id="searchBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <button class="ghost-btn" id="sourcesBtn">Sources</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Filter bar ===== -->
+  <section class="filterbar">
+    <div class="filterbar-inner">
+      <!-- Brand chips -->
+      <div class="chip-group" id="brandChips">
+        <button class="chip active" data-brand="all">All brands</button>
+        <button class="chip" data-brand="John Deere">John Deere</button>
+        <button class="chip" data-brand="Kubota">Kubota</button>
+      </div>
+
+      <div class="filters-grid">
+        <label class="field">
+          <span>Model</span>
+          <select id="fModel"><option value="">Any model</option></select>
+        </label>
+
+        <label class="field">
+          <span>Year (min)</span>
+          <select id="fYear"><option value="">Any year</option></select>
+        </label>
+
+        <label class="field">
+          <span>Discharge</span>
+          <select id="fDischarge">
+            <option value="">Any discharge</option>
+            <option value="rear">Rear discharge</option>
+            <option value="side">Side discharge</option>
+          </select>
+        </label>
+
+        <label class="field range-field">
+          <span>Max price <em id="priceVal">$25,000</em></span>
+          <input id="fPrice" type="range" min="2000" max="25000" step="500" value="25000" />
+        </label>
+
+        <label class="field range-field">
+          <span>Max hours <em id="hoursVal">2,500</em></span>
+          <input id="fHours" type="range" min="0" max="2500" step="50" value="2500" />
+        </label>
+
+        <label class="field range-field">
+          <span>Min horsepower <em id="hpVal">0 hp</em></span>
+          <input id="fHp" type="range" min="0" max="40" step="1" value="0" />
+        </label>
+      </div>
+
+      <div class="filterbar-foot">
+        <div class="result-count" id="resultCount">—</div>
+        <div class="foot-right">
+          <select id="sortBy" class="sort-select">
+            <option value="newest">Sort: Newest listings</option>
+            <option value="priceAsc">Price: Low to high</option>
+            <option value="priceDesc">Price: High to low</option>
+            <option value="hoursAsc">Hours: Low to high</option>
+            <option value="yearDesc">Year: Newest first</option>
+          </select>
+          <button class="reset-btn" id="resetBtn">Reset filters</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Listings grid ===== -->
+  <main class="container">
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>
+      <div class="empty-emoji">🔍</div>
+      <h3>No mowers match your filters</h3>
+      <p>Try widening the price or hours range, or resetting your filters.</p>
+    </div>
+  </main>
+
+  <!-- ===== Sources / live-search modal ===== -->
+  <div class="modal-backdrop" id="sourcesModal" hidden>
+    <div class="modal">
+      <button class="modal-close" id="sourcesClose" aria-label="Close">✕</button>
+      <h2>Searching live web listings</h2>
+      <p class="modal-lead">This page ships with sample data. To pull <strong>live listings from across the web</strong>, connect one or more sources below — each just needs an endpoint that returns JSON in the listing shape.</p>
+      <ul class="source-list">
+        <li><strong>MachineFinder</strong> (John Deere) — official dealer inventory</li>
+        <li><strong>TractorHouse / Machinery Pete</strong> — large dealer + auction network</li>
+        <li><strong>Kubota dealer locator feeds</strong> — regional dealer inventory</li>
+        <li><strong>Facebook Marketplace / Craigslist</strong> — requires a scraping proxy or paid API</li>
+      </ul>
+      <p class="modal-note">Drop your backend URL into <code>DATA_SOURCE_URL</code> in <code>app.js</code> and the grid will render live results instead of samples. The fetch + render path is already wired up.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>MowerFinder · demo build · sample listings for layout/UX. Connect a data source for live results.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

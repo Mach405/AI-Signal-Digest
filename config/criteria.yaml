@@ -1,0 +1,47 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Your ranking rubric. The daily agent scores each item 1–10 on how important /
+# high-magnitude it is *to you*. Edit freely — this file IS the intelligence.
+#
+# `dimensions` are what the agent weighs. Weights are relative (they don't need
+# to sum to anything). Seeded with your stated AI-bottleneck focus — tune away.
+# ─────────────────────────────────────────────────────────────────────────────
+
+focus: >
+  I'm an investor focused on AI and, specifically, AI bottlenecks — compute,
+  memory/HBM, power & energy, fabs/packaging, networking, and inference cost.
+  I want to surface the highest-signal, most actionable or thesis-changing
+  information from the people I follow, and ignore recycled commentary.
+
+dimensions:
+  - name: actionability
+    weight: 3
+    describe: >
+      Names specific companies/tickers, a concrete trade, a position change, or a
+      dated catalyst. Concrete & actionable scores high; vague macro talk scores low.
+
+  - name: ai_bottleneck_relevance
+    weight: 3
+    describe: >
+      Directly about AI bottlenecks — compute, memory/HBM, power, fabs/packaging,
+      networking, inference economics. The closer to this core, the higher.
+
+  - name: novelty
+    weight: 2
+    describe: >
+      New information or genuinely new analysis. Penalize recycled talking points
+      and things already widely known.
+
+  - name: non_consensus
+    weight: 2
+    describe: >
+      Diverges from the herd with a defensible argument. Reward differentiated
+      views over consensus repetition.
+
+  - name: conviction_and_evidence
+    weight: 1
+    describe: >
+      Backed by data, primary sources, or a clear reasoned case rather than vibes.
+
+# Items scoring at or above this make the digest's top section. Below it, they're
+# listed compactly so nothing is hidden but the noise stays out of your way.
+highlight_threshold: 7

@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Your sources. All three types are just RSS feeds under the hood — no API keys.
+#
+# Manage these by hand, or with the CLI (which preserves these comments):
+#   python run.py list
+#   python run.py add youtube "Name" "@handle-or-url" [--weight 1.0] [--note "..."]
+#   python run.py remove "Name"
+#   python run.py disable "Name"   /   python run.py enable "Name"
+#
+# Per-source fields:
+#   url             : feed URL. For YouTube, `add` resolves an @handle/URL for you.
+#   weight          : 0.5–2.0, nudges this source's scores. Default 1.0. Optional.
+#   enabled         : false to mute a source without deleting it. Default true.
+#   note            : free text the scoring agent reads as context. Optional.
+#   require_mention : agent drops items from this source that don't mention the
+#                     string (used to follow one guest on a shared channel).
+# ─────────────────────────────────────────────────────────────────────────────
+
+youtube:
+- name: "Jo Bhakdi"
+  url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCSjlTWo8-Nbo6koK8df1y5w"
+  weight: 1.0
+  enabled: true
+
+- name: "Jordi Visser"
+  url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCSLOw8JrFTBb3qF-p4v0v_w"
+  weight: 1.0
+  enabled: true
+
+- name: "micro2macr0"
+  url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCtpBpVlzN4fbgLKc-Zg-_aA"
+  weight: 1.0
+  enabled: true
+
+- name: "Cern Basher"
+  url: "https://www.youtube.com/feeds/videos.xml?channel_id=UC8nGFuVWiqciNqATS568GYQ"
+  weight: 1.0
+  enabled: true
+
+- name: "Brighter With Herbert (Jeff Lutz)"
+  url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCXB0RGwFLRo3tf4n4U1x6Ow"
+  weight: 1.0
+  enabled: true
+  note: "Following supply-chain expert Jeff Lutz, a recurring guest. Not the host."
+  require_mention: "Jeff Lutz"
+
+substack:
+- name: "Jordi Visser"
+  url: "https://visserlabs.substack.com/feed"
+  weight: 1.0
+  enabled: true
+
+podcast: []
