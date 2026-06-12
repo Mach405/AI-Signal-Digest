@@ -13,7 +13,9 @@ inbox_dir: data/inbox       # raw fetched items, one JSON per run
 digest_dir: data/digests    # finished daily digests
 
 # Email delivery (handled by the scheduled Claude agent via your Gmail connection).
+# Recipient is set in the cloud routine's prompt (kept out of this repo so the
+# repo can be public without exposing your address).
 email:
   enabled: true
-  to: "whoisjohngalt22@gmail.com"
+  to: ""        # set by the scheduled routine
   subject_prefix: "📈 AI Signal Digest"
