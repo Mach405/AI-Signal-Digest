@@ -9,13 +9,13 @@
     <string>/bin/zsh</string>
     <string>/Users/jonathanreed/my-first-project/run_daily.sh</string>
   </array>
-  <!-- 6:30 AM America/Chicago = 7:30 AM US Eastern. launchd uses local wall-clock
-       time, so this auto-adjusts for daylight saving. Change Hour/Minute to taste.
-       If the Mac is asleep at this time, the run fires on the next wake. -->
+  <!-- 7:30 AM local (America/Puerto_Rico, AST/UTC-4). AST has no DST, so this
+       equals 7:30 ET in US summer and 6:30 ET in US winter. launchd fires at this
+       wall-clock time; if the Mac is asleep, it runs on the next wake. -->
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key>
-    <integer>6</integer>
+    <integer>7</integer>
     <key>Minute</key>
     <integer>30</integer>
   </dict>
