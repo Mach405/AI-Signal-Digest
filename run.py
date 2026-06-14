@@ -2,6 +2,7 @@
 """Entry point.
 
   python run.py fetch                  # run the daily fetch -> data/inbox/<date>.json
+  python run.py render <scored.json>   # render a scored digest JSON -> dark-theme PDF
   python run.py list                   # list all configured sources
   python run.py add <type> "<name>" <url-or-@handle> [--weight W] [--note "..."]
   python run.py remove "<name>"        # remove source(s) by name
@@ -24,6 +25,13 @@ def main():
 
     if cmd == "fetch":
         pipeline.run()
+
+    elif cmd == "render":
+        if not rest:
+            print("usage: python run.py render <scored.json> [out.pdf]"); return
+        from src import render
+        out = render.render(rest[0], rest[1] if len(rest) > 1 else None)
+        print(f"  wrote {out}")
 
     elif cmd == "list":
         manage.list_sources()

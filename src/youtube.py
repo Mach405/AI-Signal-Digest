@@ -56,3 +56,33 @@ def fetch_transcript(video_id, max_chars):
     text = " ".join(c["text"] for c in chunks if c.get("text"))
     text = re.sub(r"\s+", " ", text).strip()
     return text[:max_chars]
+
+
+def fetch_segments(video_id):
+    """Return [(start_seconds, text), ...] for building &t= deep links. [] if none."""
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+    except ImportError:
+        return []
+    try:
+        raw = YouTubeTranscriptApi().fetch(video_id)
+        return [(float(c.start), c.text) for c in raw]
+    except Exception:
+        try:
+            raw = YouTubeTranscriptApi.get_transcript(video_id)
+            return [(float(c["start"]), c["text"]) for c in raw]
+        except Exception:
+            return []
+
+
+def jump_url(video_id, segments, keywords, skip_intro=12.0):
+    """Deep link to the first post-intro segment mentioning any keyword."""
+    secs = 0.0
+    for start, text in segments:
+        if start < skip_intro:
+            continue
+        low = text.lower()
+        if any(k.lower() in low for k in keywords):
+            secs = start
+            break
+    return f"https://youtu.be/{video_id}?t={int(secs)}"

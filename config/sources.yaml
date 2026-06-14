@@ -44,10 +44,19 @@ youtube:
   note: "Following supply-chain expert Jeff Lutz, a recurring guest. Not the host."
   require_mention: "Jeff Lutz"
 
+- name: Antonio Linares
+  url: 
+    https://www.youtube.com/feeds/videos.xml?channel_id=UChJdn-FOTmTc7nm-msFTqTQ
+  weight: 1.0
+  enabled: true
 substack:
 - name: "Jordi Visser"
   url: "https://visserlabs.substack.com/feed"
   weight: 1.0
   enabled: true
 
+- name: Antonio Linares
+  url: https://antoniolinares.substack.com/feed
+  weight: 1.0
+  enabled: true
 podcast: []

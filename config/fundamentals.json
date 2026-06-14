@@ -1,0 +1,53 @@
+{
+  "as_of": "2026-06-12",
+  "note": "Forward 12-month P/E. Cross-checked across 2+ sources (stockanalysis, gurufocus, financecharts, valueinvesting, Simply Wall St). Most names give no formal EPS guidance, so these are consensus NTM estimates; they move with price and should be refreshed each run.",
+  "forward_pe": {
+    "TSLA": {
+      "pe": "~205",
+      "note": "no forward EPS guidance; consensus NTM (185-213 across sources)"
+    },
+    "NVDA": {
+      "pe": "~23"
+    },
+    "AMD": {
+      "pe": "~60"
+    },
+    "PLTR": {
+      "pe": "~91"
+    },
+    "HIMS": {
+      "pe": "~40"
+    },
+    "SOFI": {
+      "pe": "~27"
+    },
+    "TEM": {
+      "pe": "n/m",
+      "note": "unprofitable in 2026E (~-$2.04 EPS)"
+    },
+    "SPCX": {
+      "pe": "N/A",
+      "note": "private / pre-IPO"
+    },
+    "MSTR": {
+      "pe": "n/m",
+      "note": "bitcoin proxy"
+    },
+    "ASST": {
+      "pe": "n/m",
+      "note": "bitcoin treasury"
+    },
+    "IBIT": {
+      "pe": "—",
+      "note": "spot bitcoin ETF"
+    },
+    "BTC": {
+      "pe": "—",
+      "note": "crypto"
+    },
+    "MU": {
+      "pe": "~10",
+      "note": "memory/HBM; cyclical, ~9-11 across sources"
+    }
+  }
+}

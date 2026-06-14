@@ -8,6 +8,7 @@ are intentionally NOT here — those are done by the scheduled Claude agent so t
 use your rubric + your Gmail connection with no extra API keys.
 """
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -20,7 +21,9 @@ def run():
     cfg = config.settings()
     srcs = config.sources()
     now = datetime.now(timezone.utc)
-    lookback = cfg.get("lookback_hours", 30)
+    # LOOKBACK_HOURS env var overrides the configured window (used for test runs,
+    # e.g. a 7-day catch-up: LOOKBACK_HOURS=168 python run.py fetch).
+    lookback = int(os.environ.get("LOOKBACK_HOURS", cfg.get("lookback_hours", 24)))
 
     all_items = []
     for stype in ("youtube", "substack", "podcast"):

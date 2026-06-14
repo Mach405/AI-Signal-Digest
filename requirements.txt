@@ -3,3 +3,4 @@ youtube-transcript-api>=0.6.2
 requests>=2.31.0
 PyYAML>=6.0.1
 ruamel.yaml>=0.18.6
+fpdf2>=2.7.9

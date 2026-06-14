@@ -6,3 +6,6 @@ __pycache__/
 data/seen.sqlite
 data/inbox/
 data/digests/
+data/scored/
+data/market/
+data/track_record.jsonl
