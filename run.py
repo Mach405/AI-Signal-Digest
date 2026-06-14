@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Entry point.
 
+  python run.py daily                  # full local run: fetch -> score -> render -> email
   python run.py fetch                  # run the daily fetch -> data/inbox/<date>.json
+  python run.py score                  # score newest inbox via `claude -p` -> data/scored/<date>.json
   python run.py render <scored.json>   # render a scored digest JSON -> dark-theme PDF
+  python run.py email <pdf> [scored]   # email a PDF via Gmail SMTP
   python run.py list                   # list all configured sources
   python run.py add <type> "<name>" <url-or-@handle> [--weight W] [--note "..."]
   python run.py remove "<name>"        # remove source(s) by name
@@ -19,12 +22,64 @@ import sys
 from src import pipeline, youtube, config, manage
 
 
+def _daily():
+    import json
+    from src import score, render
+    pipeline.run()
+    sp = score.run()
+    data = json.loads(open(sp, encoding="utf-8").read())
+    pdf = None
+    if data.get("items"):
+        pdf = f"data/digests/{data['date']}.pdf"
+        render.render(str(sp), pdf)
+    _email(pdf, str(sp))
+    print(f"  daily complete: {data['date']} — {len(data.get('items', []))} items")
+
+
+def _email(pdf, scored_path):
+    import json
+    from src import emailer
+    sec = emailer.secrets()
+    to = sec.get("GMAIL_TO") or sec.get("GMAIL_ADDR")
+    if not to:
+        print("  ! no recipient — set GMAIL_TO / GMAIL_ADDR in config/secrets.env")
+        return
+    prefix = config.settings().get("email", {}).get("subject_prefix", "AI Signal Digest")
+    data = json.loads(open(scored_path, encoding="utf-8").read()) if scored_path else {}
+    date = data.get("date", "")
+    items = data.get("items", [])
+    thr = data.get("highlight_threshold", 7)
+    hi = sorted([i for i in items if i.get("score", 0) >= thr], key=lambda x: -x["score"])
+    subject = f"{prefix} — {date}" if date else prefix
+    if not items:
+        body = f"No new items today ({date})."
+    else:
+        tops = "\n".join(f"  [{i['score']}] {i['title']} — {i['source']}" for i in hi[:3])
+        body = (f"AI Signal Digest — {date}\n{len(items)} items, {len(hi)} highlights.\n\n"
+                f"{data.get('synthesis', '')}\n\nTop highlights:\n{tops}\n\n"
+                "(Full digest attached as PDF.)")
+    emailer.send(to, subject, body, pdf_path=pdf)
+    print(f"  emailed {to}: {subject}" + (" (+PDF)" if pdf else ""))
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "fetch"
     rest = sys.argv[2:]
 
     if cmd == "fetch":
         pipeline.run()
+
+    elif cmd == "daily":
+        _daily()
+
+    elif cmd == "score":
+        from src import score
+        print(f"  wrote {score.run()}")
+
+    elif cmd == "email":
+        if not rest:
+            print("usage: python run.py email <pdf> [scored.json]"); return
+        _email(rest[0], rest[1] if len(rest) > 1 else None)
 
     elif cmd == "render":
         if not rest:

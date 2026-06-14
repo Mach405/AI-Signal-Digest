@@ -9,3 +9,7 @@ data/digests/
 data/scored/
 data/market/
 data/track_record.jsonl
+data/daily.log
+
+# Secrets — never commit (Gmail app password lives here).
+config/secrets.env

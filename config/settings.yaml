@@ -12,10 +12,14 @@ max_transcript_chars: 18000
 inbox_dir: data/inbox       # raw fetched items, one JSON per run
 digest_dir: data/digests    # finished daily digests
 
-# Email delivery (handled by the scheduled Claude agent via your Gmail connection).
-# Recipient is set in the cloud routine's prompt (kept out of this repo so the
-# repo can be public without exposing your address).
+# Email delivery. Local runs send via Gmail SMTP; the recipient + app password
+# live in config/secrets.env (gitignored), NOT here, so the repo can stay public.
 email:
   enabled: true
-  to: ""        # set by the scheduled routine
   subject_prefix: "📈 AI Signal Digest"
+
+# Tickers to flag with a * WATCH marker in the PDF (your Robinhood watchlist names).
+watchlist: [AMD, TSLA, NVDA]
+
+# Model used for the headless `claude -p` scoring pass.
+score_model: sonnet

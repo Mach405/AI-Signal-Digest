@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.aisignaldigest.daily</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/jonathanreed/my-first-project/run_daily.sh</string>
+  </array>
+  <!-- 6:30 AM America/Chicago = 7:30 AM US Eastern. launchd uses local wall-clock
+       time, so this auto-adjusts for daylight saving. Change Hour/Minute to taste.
+       If the Mac is asleep at this time, the run fires on the next wake. -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>6</integer>
+    <key>Minute</key>
+    <integer>30</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/jonathanreed/my-first-project/data/daily.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/jonathanreed/my-first-project/data/daily.log</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
