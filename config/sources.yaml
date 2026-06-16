@@ -54,6 +54,11 @@ youtube:
     https://www.youtube.com/feeds/videos.xml?channel_id=UCevXpeL8cNyAnww-NqJ4m2w
   weight: 1.0
   enabled: true
+- name: Pomp Podcast
+  url: 
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCML9PlpcOxM_H53IM0fa4XA
+  weight: 1.0
+  enabled: true
 substack:
 - name: "Jordi Visser"
   url: "https://visserlabs.substack.com/feed"
