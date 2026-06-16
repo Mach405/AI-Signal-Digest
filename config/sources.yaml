@@ -49,6 +49,11 @@ youtube:
     https://www.youtube.com/feeds/videos.xml?channel_id=UChJdn-FOTmTc7nm-msFTqTQ
   weight: 1.0
   enabled: true
+- name: Anthony Pompliano
+  url: 
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCevXpeL8cNyAnww-NqJ4m2w
+  weight: 1.0
+  enabled: true
 substack:
 - name: "Jordi Visser"
   url: "https://visserlabs.substack.com/feed"
@@ -57,6 +62,10 @@ substack:
 
 - name: Antonio Linares
   url: https://antoniolinares.substack.com/feed
+  weight: 1.0
+  enabled: true
+- name: Anthony Pompliano
+  url: https://pomp.substack.com/feed
   weight: 1.0
   enabled: true
 podcast: []
