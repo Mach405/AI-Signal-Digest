@@ -1,16 +1,21 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Your ranking rubric. The daily agent scores each item 1–10 on how important /
+# Your ranking rubric. The daily scorer rates each item 1-10 on how important /
 # high-magnitude it is *to you*. Edit freely — this file IS the intelligence.
 #
-# `dimensions` are what the agent weighs. Weights are relative (they don't need
-# to sum to anything). Seeded with your stated AI-bottleneck focus — tune away.
+# `dimensions` are what the scorer weighs. Weights are relative. AI bottlenecks
+# stay the highest-priority theme, but the rubric now rewards your full interest
+# set so multi-topic investors (Tesla/SpaceX, crypto, macro) aren't buried.
 # ─────────────────────────────────────────────────────────────────────────────
 
 focus: >
-  I'm an investor focused on AI and, specifically, AI bottlenecks — compute,
-  memory/HBM, power & energy, fabs/packaging, networking, and inference cost.
-  I want to surface the highest-signal, most actionable or thesis-changing
-  information from the people I follow, and ignore recycled commentary.
+  I'm an investor focused on AI and AI bottlenecks (compute, memory/HBM, power &
+  energy, fabs/packaging, networking, inference cost) — that's my #1 interest.
+  But I follow multi-topic investors, and I also care about: the Tesla / SpaceX /
+  Musk complex; Bitcoin, crypto, and digital-asset treasury companies (BTC, MSTR,
+  ASST/Strive, IBIT, and similar); broader AI & semiconductor plays (NVDA, AMD,
+  Palantir, Tempus); and macro / market-regime positioning. Surface the highest-
+  signal, most actionable or thesis-changing information across all of these and
+  ignore recycled commentary.
 
 dimensions:
   - name: actionability
@@ -23,7 +28,17 @@ dimensions:
     weight: 3
     describe: >
       Directly about AI bottlenecks — compute, memory/HBM, power, fabs/packaging,
-      networking, inference economics. The closer to this core, the higher.
+      networking, inference economics. This is the top-priority theme; the closer
+      to this core, the higher.
+
+  - name: broader_thesis_fit
+    weight: 2
+    describe: >
+      Fits my wider interest set even if it's not pure AI-bottleneck: the Tesla /
+      SpaceX / Musk complex; Bitcoin, crypto & digital-asset treasuries (BTC, MSTR,
+      ASST/Strive, IBIT, MARA, etc.); broader AI & semis (NVDA, AMD, Palantir,
+      Tempus); and macro / market-regime calls. Reward strong takes in these even
+      when AI-bottleneck relevance is low.
 
   - name: novelty
     weight: 2
@@ -42,6 +57,5 @@ dimensions:
     describe: >
       Backed by data, primary sources, or a clear reasoned case rather than vibes.
 
-# Items scoring at or above this make the digest's top section. Below it, they're
-# listed compactly so nothing is hidden but the noise stays out of your way.
-highlight_threshold: 7
+# Items scoring at or above this make the digest's top "Highlights" section.
+highlight_threshold: 6
